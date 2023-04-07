@@ -17,6 +17,7 @@ public class Player_Controller : MonoBehaviour
     [Range(0,20)]
     public float jumpHeight = 10;
     public LayerMask groundLayer;
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,7 @@ public class Player_Controller : MonoBehaviour
         inputVector = new Vector3(h * speed, rb.velocity.y, v * speed);
         transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
         rb.velocity = inputVector;
+        anim.SetFloat("Moving", moveDir.magnitude);
         Debug.DrawRay(transform.position, transform.forward * 7, Color.green);
     }
 
@@ -47,6 +49,7 @@ public class Player_Controller : MonoBehaviour
         if(GroundCheck())
         {
             rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+            anim.SetTrigger("Jump");
         }
         
     }
