@@ -20,7 +20,7 @@ public class RayCast_Script : MonoBehaviour
         {
             Debug.Log(hit.collider.gameObject.name);
 
-            hit.collider.gameObject.GetComponent<Renderer>().material.color = Color.red;
+           // hit.collider.gameObject.GetComponent<Renderer>().material.color = Color.red;
             if(hit.collider.CompareTag("Door") && canOpenDoor)
             {
                 hit.collider.gameObject.GetComponent<DoorScript>().doorOpen = true;
