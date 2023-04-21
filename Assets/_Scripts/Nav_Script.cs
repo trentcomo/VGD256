@@ -9,6 +9,8 @@ public class Nav_Script : MonoBehaviour
     public GameObject target;
     public Animator anim;
     public bool isAttacking = false;
+    bool isJumping = false;
+    public float jumpTime;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +31,15 @@ public class Nav_Script : MonoBehaviour
         {
             anim.SetFloat("Dir", agent.velocity.magnitude);
             agent.destination = target.transform.position;
+
+            if(agent.isOnOffMeshLink && !isJumping)
+            {
+                StartCoroutine(EndJump());
+                anim.SetTrigger("Jump");
+            }
         }
+
+
         
     }
     IEnumerator EndAttack()
@@ -37,5 +47,12 @@ public class Nav_Script : MonoBehaviour
         isAttacking = true;
         yield return new WaitForSeconds(2);
         isAttacking = false;
+    }
+
+    IEnumerator EndJump()
+    {
+        isJumping = true;
+        yield return new WaitForSeconds(jumpTime);
+        isJumping = false;
     }
 }
