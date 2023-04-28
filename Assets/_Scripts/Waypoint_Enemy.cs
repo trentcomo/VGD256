@@ -21,7 +21,10 @@ public class Waypoint_Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, 0.5f * moveSpeed);
+        if(Time.timeScale > 0)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, 0.5f * moveSpeed);
+        }
 
         if(Vector3.Distance(transform.position, targetPos)<0.3f)
         {
